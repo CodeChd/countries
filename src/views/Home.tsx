@@ -15,26 +15,27 @@ function Home() {
     // Fetch countries data
     useEffect(() => {
         const ApiCall = async () => {
-            setCountriesLoading("idle")
+            let fetchedData
             try {
-                const fetchedData = region.toLowerCase() === "all" ? await COUNTRIES_API.all() : await COUNTRIES_API.getByRegion(region)
+                fetchedData = region === "all" ? await COUNTRIES_API.all() : await COUNTRIES_API.getByRegion(region)
                 setCountriesLoading("successful")
-                if (countriesLoadinng === "successful") {
-                    setCountries(fetchedData)
-                }
-
             } catch (e) {
                 setCountriesLoading("rejected")
-                if (countriesLoadinng === "rejected") {
-                    setCountries([])
-                }
+            }
+
+            if (countriesLoadinng === "successful") {
+                setCountries(fetchedData)
+            }
+
+            if (countriesLoadinng === "rejected") {
+                setCountries([])
             }
         }
         ApiCall()
 
-    }, [countriesLoadinng, region]);
+    }, [region, countriesLoadinng]);
 
-    // Filtered or Unfiltered result data
+    // Filtered or Unfiltered data result
     const countriesState = useMemo(() => {
         return !searchTerm ? countries : countries.filter(({name: {common: commonName}}: { name: { common: string } }) => commonName.toLowerCase().startsWith(searchTerm)
         )
@@ -44,14 +45,7 @@ function Home() {
         <>
             <div aria-label="Options" className="flex justify-between py-8 w-full px-4">
                 <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-                <FilterDropdown>
-                    <FilterDropdown.Item>All</FilterDropdown.Item>
-                    <FilterDropdown.Item>Africa</FilterDropdown.Item>
-                    <FilterDropdown.Item>America</FilterDropdown.Item>
-                    <FilterDropdown.Item setRegion={setRegion}>Asia</FilterDropdown.Item>
-                    <FilterDropdown.Item>Europe</FilterDropdown.Item>
-                    <FilterDropdown.Item>Oceania</FilterDropdown.Item>
-                </FilterDropdown>
+                <FilterDropdown setRegion={setRegion}/>
             </div>
 
             <div aria-label="Country Lists" className="px-4 grid grid-cols-4 gap-12">
