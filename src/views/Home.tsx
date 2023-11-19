@@ -47,7 +47,7 @@ function Home() {
 
     return (
         <>
-            <div aria-label="Options" className="flex justify-between py-8 w-full px-4">
+            <div aria-label="Options" className="flex justify-between py-8 w-full px-4 ">
                 <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
                 <FilterDropdown setRegion={setRegion}/>
             </div>

@@ -10,7 +10,7 @@ function SearchField({searchTerm, setSearchTerm}: Props) {
     }
     return (
         <form className="w-full">
-            <input onChange={searchHandler} value={searchTerm} type="text" placeholder="Search for a country..." className="bg-search bg-[length:20px] bg-[10px] bg-no-repeat pl-10 p-2 w-[18rem] rounded-md drop-shadow-md outline-indigo-600"/>
+            <input onChange={searchHandler} value={searchTerm} type="text" placeholder="Search for a country..." className="bg-search dark:bg-[#1B2E3B] bg-[length:20px] bg-[10px] bg-no-repeat pl-10 p-2 w-[18rem] rounded-md drop-shadow-md outline-indigo-600"/>
         </form>
     );
 }

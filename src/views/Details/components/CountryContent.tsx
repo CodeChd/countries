@@ -16,11 +16,11 @@ function CountryContent({countryState}: Props) {
     const borders = countryState?.borders;
     const languages = countryState?.languages;
     const topLevelDomain = countryState?.tld;
-    const currencyName = countryState?.currencies[renderCurrency(countryState?.currencies)[0]]?.name;
+    const currencyName = countryState?.currencies?.[renderCurrency(countryState?.currencies)[0]]?.name;
 
 
     return (
-        <div className="grid grid-cols-2 max-xl:gap-4 mt-8">
+        <div className="grid grid-cols-2 max-xl:gap-4 mt-8 dark:text-slate-100">
             <div className="xl:w-[35rem] xl:h-[25rem]">
                 <img src={flagImg} alt={countryName} className=" h-full w-full "/>
             </div>
@@ -43,15 +43,18 @@ function CountryContent({countryState}: Props) {
                         <li><span className="font-bold text-md">Languages</span>: {renderLanguages(languages)}</li>
                     </ul>
                 </div>
-
                 <div className="flex gap-4 items-center">
                     <p className="font-bold text-md">Border Countries: </p>
 
                     <ul className="flex gap-4 ">
                         {
-                            borders.map((border: string) => (
-                                <li key={border} className="bg-white drop-shadow-md p-1 px-4">{border}</li>
-                            ))
+                                !borders
+                                ?
+                                <p className="bg-white drop-shadow-md p-1 px-4 dark:bg-[#1B2E3B] dark:text-slate-100">Unavailable!</p>
+                                :
+                                borders.map((border: string) => (
+                                    <li key={border} className="bg-white drop-shadow-md p-1 px-4 dark:bg-[#1B2E3B] dark:text-slate-100 ">{border}</li>
+                                ))
                         }
                     </ul>
 

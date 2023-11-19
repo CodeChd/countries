@@ -4,7 +4,7 @@ type Container = {
 }
 function Container({children}: Container) {
     return (
-        <div className="max-w-7xl mx-auto">{children}</div>
+        <div className="max-w-7xl mx-auto ">{children}</div>
     );
 }
 export default Container;
