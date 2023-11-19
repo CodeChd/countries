@@ -47,12 +47,12 @@ function Home() {
 
     return (
         <>
-            <div aria-label="Options" className="flex justify-between py-8 w-full px-4 ">
+            <div aria-label="Options" className="flex max-md:flex-col max-md:gap-4 justify-between py-8 w-full px-4 ">
                 <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
                 <FilterDropdown setRegion={setRegion}/>
             </div>
 
-            <div aria-label="Country Lists" className="px-4 grid grid-cols-4 gap-12">
+            <div aria-label="Country Lists" className="px-4 grid grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-12">
                 {
                     countriesState.map(data => {
                         const {name: {common: countryName}} = data
