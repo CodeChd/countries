@@ -13,7 +13,7 @@ const all = async () => {
 }
 
 const getByName = async (name: string) => {
-    const response = await apiClient.get(`name/${name}?fullText=true`, {
+    const response = await apiClient.get(`name/${name}`, {
         signal: controller.signal,
     })
 

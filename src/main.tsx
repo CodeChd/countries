@@ -4,12 +4,14 @@ import App from './App.tsx'
 import './index.css'
 import {createRoutesFromElements, Route, createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Home from "./views/Home.tsx";
+import Details from "./views/Details";
 
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="" element={<App/>}>
             <Route path="/" element={<Home/>}/>
+            <Route path="/country/details/:id" element={<Details/>}/>
         </Route>
 
     )

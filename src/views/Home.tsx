@@ -5,7 +5,7 @@ import {useEffect, useMemo, useState} from "react";
 import COUNTRIES_API from '../api/countries.ts'
 
 function Home() {
-    const [countriesLoadinng, setCountriesLoading] = useState<string>("status")
+    const [countriesLoading, setCountriesLoading] = useState<string>("idle")
     const [countries, setCountries] = useState<[]>([])
 
     //Search & region filtering
@@ -23,21 +23,25 @@ function Home() {
                 setCountriesLoading("rejected")
             }
 
-            if (countriesLoadinng === "successful") {
+            if (countriesLoading === "successful") {
                 setCountries(fetchedData)
             }
 
-            if (countriesLoadinng === "rejected") {
+            if (countriesLoading === "rejected") {
                 setCountries([])
             }
         }
         ApiCall()
 
-    }, [region, countriesLoadinng]);
+    }, [region, countriesLoading]);
 
     // Filtered or Unfiltered data result
     const countriesState = useMemo(() => {
-        return !searchTerm ? countries : countries.filter(({name: {common: commonName}}: { name: { common: string } }) => commonName.toLowerCase().startsWith(searchTerm)
+        return !searchTerm ? countries : countries.filter(({name: {common: commonName}}: {
+                name: {
+                    common: string
+                }
+            }) => commonName.toLowerCase().startsWith(searchTerm)
         )
     }, [searchTerm, countries])
 
@@ -52,7 +56,7 @@ function Home() {
                 {
                     countriesState.map(data => {
                         const {name: {common: countryName}} = data
-                        return <CountryCard key={countryName} countries={data}/>
+                        return <div key={countryName}><CountryCard countries={data}/></div>
                     })
                 }
             </div>
