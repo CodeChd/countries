@@ -9,7 +9,7 @@ function CountryCard({ countries}: Props) {
     const {flags, name: { common: countryName }, population, region, capital} = countries
 
     return (
-        <article className="bg-white dark:bg-[#1B2E3B] dark:text-slate-100 rounded-md overflow-hidden shadow-md">
+        <article className="bg-white dark:bg-[#1B2E3B] dark:text-slate-100 rounded-md overflow-hidden shadow-md ">
 
             <Link to={`/country/details/${countryName}`} aria-label="Flag image container">
                 <img src={flags.png} alt={countryName} className="object-cover max-w-full w-full h-48" />

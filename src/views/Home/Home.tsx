@@ -1,8 +1,9 @@
-import SearchField from "../components/Search";
-import FilterDropdown from "../components/FilterDropdown";
-import CountryCard from "../components/CountryCard";
+
 import {useEffect, useMemo, useState} from "react";
-import COUNTRIES_API from '../api/countries.ts'
+import COUNTRIES_API from '../../api/countries.ts'
+import CountryLists from "../../components/CountryLists";
+import Forms from "./components/Forms.tsx";
+
 
 function Home() {
     const [countriesLoading, setCountriesLoading] = useState<string>("idle")
@@ -47,20 +48,8 @@ function Home() {
 
     return (
         <>
-            <div aria-label="Options" className="flex max-md:flex-col max-md:gap-4 justify-between py-8 w-full px-4 ">
-                <SearchField searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-                <FilterDropdown setRegion={setRegion}/>
-            </div>
-
-            <div aria-label="Country Lists" className="px-4 grid grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-12">
-                {
-                    countriesState.map(data => {
-                        const {name: {common: countryName}} = data
-                        return <div key={countryName}><CountryCard countries={data}/></div>
-                    })
-                }
-            </div>
-
+             <Forms searchTerm={searchTerm} setSearchTerm={setSearchTerm} setRegion={setRegion}/>
+            <CountryLists countriesLoading={countriesLoading} countriesState={countriesState}/>
         </>
     );
 }

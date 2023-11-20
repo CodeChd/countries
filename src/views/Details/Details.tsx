@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import COUNTRIES_API from '../../api/countries.ts'
 import BackButton from "../../components/BackButton";
 import CountryContent from "./components/CountryContent.tsx";
+import LoadingDetails from "../../components/LoadingDetails";
 
 function Details() {
     const {id} = useParams()
@@ -34,15 +35,21 @@ function Details() {
     }, [countryLoading, id]);
 
 
-    return countryLoading === "idle" ? (
-        "Loading..."
-    ) : countryLoading === "successful" && countryState  ? (
-        <div className="py-8 px-4">
-            <BackButton />
-            <CountryContent countryState={countryState} />
+    return (
+        <div className="px-4 py-8 w-full">
+            {
+                countryLoading === "idle" ? (
+                    <LoadingDetails/>
+                ) : countryLoading === "successful" && countryState && (
+                    <>
+                        <BackButton/>
+                        <CountryContent countryState={countryState}/>
+                    </>
+                )
+            }
         </div>
-    ) : null;
 
+    )
 
 }
 

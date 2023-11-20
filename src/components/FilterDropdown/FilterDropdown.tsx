@@ -56,7 +56,7 @@ const Menu = ({children, isCLicked}: Props) => {
     return (
         <ul
             aria-label="Dropdown Menu"
-            className={`absolute list-none bg-white dark:bg-[#1B2E3B] dark:text-slate-100 p-4 mt-2 w-full drop-shadow-sm rounded-sm ${isCLicked ? "" : "hidden"}`}
+            className={`z-10 absolute  list-none bg-white dark:bg-[#1B2E3B] dark:text-slate-100 p-4 mt-2 w-full drop-shadow-sm rounded-sm ${isCLicked ? "" : "hidden"}`}
         >
             {children}
         </ul>
