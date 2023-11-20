@@ -3,7 +3,7 @@ import CountryCard from "../CountryCard";
 
 type Props = {
     countriesLoading: string
-    countriesState: any
+    countriesState: []
 }
 
 function CountryLists({countriesLoading, countriesState}: Props) {

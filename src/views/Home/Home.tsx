@@ -37,7 +37,7 @@ function Home() {
     }, [region, countriesLoading]);
 
     // Filtered or Unfiltered data result
-    const countriesState = useMemo(() => {
+    const countriesState: any = useMemo(() => {
         return !searchTerm ? countries : countries.filter(({name: {common: commonName}}: {
                 name: {
                     common: string
