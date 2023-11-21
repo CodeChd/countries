@@ -1,5 +1,5 @@
 
-import {useEffect, useMemo, useState} from "react";
+import { useEffect, useMemo, useState} from "react";
 import COUNTRIES_API from '../../api/countries.ts'
 import CountryLists from "../../components/CountryLists";
 import Forms from "./components/Forms.tsx";
@@ -7,7 +7,7 @@ import Forms from "./components/Forms.tsx";
 
 function Home() {
     const [countriesLoading, setCountriesLoading] = useState<string>("idle")
-    const [countries, setCountries] = useState<[]>([])
+    const [countries, setCountries] = useState([])
 
     //Search & region filtering
     const [region, setRegion] = useState<string>("all")
@@ -15,26 +15,27 @@ function Home() {
 
     // Fetch countries data
     useEffect(() => {
-        const ApiCall = async () => {
-            let fetchedData
+        const fetchCountries = async () => {
             try {
-                fetchedData = region === "all" ? await COUNTRIES_API.all() : await COUNTRIES_API.getByRegion(region)
-                setCountriesLoading("successful")
+                const fetchedData = region === "all" ? await COUNTRIES_API.all() : await COUNTRIES_API.getByRegion(region);
+                setCountries(fetchedData);
+                setCountriesLoading("successful");
             } catch (e) {
-                setCountriesLoading("rejected")
+                setCountries([]);
+                setCountriesLoading("rejected");
             }
+        };
 
-            if (countriesLoading === "successful") {
-                setCountries(fetchedData)
-            }
+        fetchCountries();
+    }, [region]);
 
-            if (countriesLoading === "rejected") {
-                setCountries([])
-            }
+    useEffect(() => {
+        if (countriesLoading === "rejected") {
+            setCountries([]);
         }
-        ApiCall()
+    }, [countriesLoading]);
 
-    }, [region, countriesLoading]);
+
 
     // Filtered or Unfiltered data result
     const countriesState: any = useMemo(() => {
